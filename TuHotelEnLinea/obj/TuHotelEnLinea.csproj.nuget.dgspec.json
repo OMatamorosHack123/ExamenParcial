@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Oscar\\source\\repos\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj": {}
+    "C:\\Users\\Oscar\\Desktop\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Oscar\\source\\repos\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj": {
+    "C:\\Users\\Oscar\\Desktop\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Oscar\\source\\repos\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj",
+        "projectUniqueName": "C:\\Users\\Oscar\\Desktop\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj",
         "projectName": "TuHotelEnLinea",
-        "projectPath": "C:\\Users\\Oscar\\source\\repos\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj",
+        "projectPath": "C:\\Users\\Oscar\\Desktop\\TuHotelEnLinea\\TuHotelEnLinea\\TuHotelEnLinea.csproj",
         "packagesPath": "C:\\Users\\Oscar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Oscar\\source\\repos\\TuHotelEnLinea\\TuHotelEnLinea\\obj\\",
+        "outputPath": "C:\\Users\\Oscar\\Desktop\\TuHotelEnLinea\\TuHotelEnLinea\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Oscar\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,15 +40,25 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.4.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.2, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.12, )"
+              "version": "[7.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.12, )"
+              "version": "[7.0.2, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",

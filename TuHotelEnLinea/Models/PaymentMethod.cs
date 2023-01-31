@@ -1,15 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TuHotelEnLinea.Models
+namespace TuHotelEnLinea.Models;
+
+public partial class PaymentMethod
 {
-    public class PaymentMethod
-    {
-        public int PaymentMethodId { get; set; }
+    public int PaymentMethodId { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string PaymentMethodName { get; set;}
+    public string PaymentMethodName { get; set; } = null!;
 
-        public IEnumerable<Sale> Sales { get; set; }
-    }
+    public virtual ICollection<Sale> Sales { get; } = new List<Sale>();
 }

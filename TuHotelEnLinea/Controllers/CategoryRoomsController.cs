@@ -1,15 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using TuHotelEnLinea.Data;
 using TuHotelEnLinea.Models;
 
 namespace TuHotelEnLinea.Controllers
 {
     public class CategoryRoomsController : Controller
     {
-        private readonly TuHotelEnLineaContext _context;
+        private readonly HotelEnLineaContext _context;
 
-        public CategoryRoomsController(TuHotelEnLineaContext context)
+        public CategoryRoomsController(HotelEnLineaContext context)
         {
             _context = context;
         }
@@ -17,18 +21,18 @@ namespace TuHotelEnLinea.Controllers
         // GET: CategoryRooms
         public async Task<IActionResult> Index()
         {
-            return View(await _context.CategoryRoom.ToListAsync());
+              return View(await _context.CategoryRooms.ToListAsync());
         }
 
         // GET: CategoryRooms/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.CategoryRoom == null)
+            if (id == null || _context.CategoryRooms == null)
             {
                 return NotFound();
             }
 
-            var categoryRoom = await _context.CategoryRoom
+            var categoryRoom = await _context.CategoryRooms
                 .FirstOrDefaultAsync(m => m.CategoryRoomId == id);
             if (categoryRoom == null)
             {
@@ -51,23 +55,24 @@ namespace TuHotelEnLinea.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CategoryRoomId,CategoryRoomName,CategoryRoomDescription")] CategoryRoom categoryRoom)
         {
-
-            _context.Add(categoryRoom);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-
-
+            if (ModelState.IsValid)
+            {
+                _context.Add(categoryRoom);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(categoryRoom);
         }
 
         // GET: CategoryRooms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.CategoryRoom == null)
+            if (id == null || _context.CategoryRooms == null)
             {
                 return NotFound();
             }
 
-            var categoryRoom = await _context.CategoryRoom.FindAsync(id);
+            var categoryRoom = await _context.CategoryRooms.FindAsync(id);
             if (categoryRoom == null)
             {
                 return NotFound();
@@ -87,37 +92,38 @@ namespace TuHotelEnLinea.Controllers
                 return NotFound();
             }
 
-
-            try
+            if (ModelState.IsValid)
             {
-                _context.Update(categoryRoom);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryRoomExists(categoryRoom.CategoryRoomId))
+                try
                 {
-                    return NotFound();
+                    _context.Update(categoryRoom);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!CategoryRoomExists(categoryRoom.CategoryRoomId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
+                return RedirectToAction(nameof(Index));
             }
-            return RedirectToAction(nameof(Index));
-
-
+            return View(categoryRoom);
         }
 
         // GET: CategoryRooms/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.CategoryRoom == null)
+            if (id == null || _context.CategoryRooms == null)
             {
                 return NotFound();
             }
 
-            var categoryRoom = await _context.CategoryRoom
+            var categoryRoom = await _context.CategoryRooms
                 .FirstOrDefaultAsync(m => m.CategoryRoomId == id);
             if (categoryRoom == null)
             {
@@ -132,23 +138,23 @@ namespace TuHotelEnLinea.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.CategoryRoom == null)
+            if (_context.CategoryRooms == null)
             {
-                return Problem("Entity set 'TuHotelEnLineaContext.CategoryRoom'  is null.");
+                return Problem("Entity set 'HotelEnLineaContext.CategoryRooms'  is null.");
             }
-            var categoryRoom = await _context.CategoryRoom.FindAsync(id);
+            var categoryRoom = await _context.CategoryRooms.FindAsync(id);
             if (categoryRoom != null)
             {
-                _context.CategoryRoom.Remove(categoryRoom);
+                _context.CategoryRooms.Remove(categoryRoom);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CategoryRoomExists(int id)
         {
-            return _context.CategoryRoom.Any(e => e.CategoryRoomId == id);
+          return _context.CategoryRooms.Any(e => e.CategoryRoomId == id);
         }
     }
 }

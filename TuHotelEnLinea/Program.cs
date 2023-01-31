@@ -1,13 +1,11 @@
-ï»¿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using TuHotelEnLinea.Data;
+using Microsoft.EntityFrameworkCore;
+using TuHotelEnLinea.Models;
+
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddDbContext<TuHotelEnLineaContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("TuHotelEnLineaContext") ?? throw new InvalidOperationException("Connection string 'TuHotelEnLineaContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<HotelEnLineaContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("HotelEnLineaContext") ?? throw new InvalidOperationException("No se estableció conexión con la base de datos")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

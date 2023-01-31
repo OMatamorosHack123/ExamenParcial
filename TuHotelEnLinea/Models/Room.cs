@@ -1,24 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TuHotelEnLinea.Models
+namespace TuHotelEnLinea.Models;
+
+public partial class Room
 {
-    public class Room
-    {
-        public int RoomId { get; set; }
+    public int RoomId { get; set; }
 
-        public int CategoryRoomId {get; set;}
-        public CategoryRoom CategoryRoom { get; set; }
+    public int CategoryRoomId { get; set; }
 
-        [Required]
-        public int RoomNum { get; set; }
+    public int RoomNum { get; set; }
 
-        [Required]
-        public int RoomFloor { get; set; }
+    public int RoomFloor { get; set; }
 
-        [Required]
-        public int RoomQuota { get; set; }
+    public int RoomQuota { get; set; }
 
-        public IEnumerable<Package> Packages { get; set; }
-        public IEnumerable<CustomerXRoom> CustomerXRooms { get; set; }
-    }
+    public virtual CategoryRoom CategoryRoom { get; set; } = null!;
+
+    public virtual ICollection<CustomerXroom> CustomerXrooms { get; } = new List<CustomerXroom>();
+
+    public virtual ICollection<Package> Packages { get; } = new List<Package>();
 }

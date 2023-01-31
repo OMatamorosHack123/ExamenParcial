@@ -1,28 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TuHotelEnLinea.Models
+namespace TuHotelEnLinea.Models;
+
+public partial class Customer
 {
-    public class Customer
-    {
-        public int CustomerId { get; set; }
+    public int CustomerId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string CustomerName { get; set; }
+    public string CustomerName { get; set; } = null!;
 
-        [Required]
-        [StringLength(50)]
-        public string CustomerLastName { get; set; }
+    public string CustomerLastName { get; set; } = null!;
 
-        [Required]
-        [StringLength(50)]
-        public string CustomerIdCard { get; set; }
+    public string CustomerIdCard { get; set; } = null!;
 
-        [Required]
-        [StringLength(45)]
-        public string CustomerPhone { get; set;}
+    public string CustomerPhone { get; set; } = null!;
 
-        public IEnumerable<Booking> Bookings { get; set; }
-        public IEnumerable<CustomerXRoom> CustomerXRooms { get; set; }
-    }
+    public virtual ICollection<Booking> Bookings { get; } = new List<Booking>();
+
+    public virtual ICollection<CustomerXroom> CustomerXrooms { get; } = new List<CustomerXroom>();
 }

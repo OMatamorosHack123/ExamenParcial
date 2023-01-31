@@ -1,25 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TuHotelEnLinea.Models
+namespace TuHotelEnLinea.Models;
+
+public partial class Package
 {
-    public class Package
-    {
-        public int PackageId { get; set; }
+    public int PackageId { get; set; }
 
-        public int RoomId { get; set; }
-        public Room Room { get; set; }
+    public int RoomId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string PackageName { get; set; }
+    public string PackageName { get; set; } = null!;
 
-        [Required]
-        public double PackagePrice { get; set; }
+    public double PackagePrice { get; set; }
 
-        [Required]
-        public int PackageQdays { get; set; }
+    public int PackageQdays { get; set; }
 
-        public IEnumerable<Booking> Bookings { get; set; }
-        public IEnumerable<PackageExtra> PackageExtras { get; set; }
-    }
+    public virtual ICollection<Booking> Bookings { get; } = new List<Booking>();
+
+    public virtual ICollection<PackageExtra> PackageExtras { get; } = new List<PackageExtra>();
+
+    public virtual Room Room { get; set; } = null!;
 }

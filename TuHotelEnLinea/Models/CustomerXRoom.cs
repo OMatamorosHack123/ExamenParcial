@@ -1,17 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
-namespace TuHotelEnLinea.Models
+namespace TuHotelEnLinea.Models;
+
+public partial class CustomerXroom
 {
-    public class CustomerXRoom
-    {
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+    public int CustomerId { get; set; }
 
-        public int RoomId { get; set; }
-        public Room Room { get; set; }
+    public int RoomId { get; set; }
 
-        [Required]
-        [DataType(DataType.Date)]
-        public string CustomerCreatedAt { get; set; }
-    }
+    public string CustomerCreatedAt { get; set; } = null!;
+
+    public int CustomerXroomId { get; set; }
+
+    public virtual Customer Customer { get; set; } = null!;
+
+    public virtual Room Room { get; set; } = null!;
 }
